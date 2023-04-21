@@ -1,10 +1,13 @@
 [tool.poetry]
 name = "stocks-patterns"
 version = "0.1.0"
-description = ""
+description = "Searching for patterns on stock price charts"
+repository = "https://github.com/fasthydra/stocks_patterns"
 authors = ["stocks-patterns_team <fasthydra@gmail.com>"]
 readme = "README.md"
-packages = [{include = "stocks_patterns"}]
+ # папка с модулями проекта без нее не получается настроть scripts
+packages = [{include = "src"}]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
