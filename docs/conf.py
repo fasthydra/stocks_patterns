@@ -186,7 +186,7 @@ latex_documents = [
     ('index',
      'stocks_patterns.tex',
      u'stocks_patterns Documentation',
-     u"stocks_patterns", 'manual'),
+     u"stocks_patterns_team", 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -216,7 +216,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'stocks_patterns', u'stocks_patterns Documentation',
-     [u"stocks_patterns"], 1)
+     [u"stocks_patterns_team"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -230,8 +230,8 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'stocks_patterns', u'stocks_patterns Documentation',
-     u"stocks_patterns", 'stocks_patterns',
-     'Searching for patterns on stock price charts', 'Miscellaneous'),
+     u"stocks_patterns_team", 'stocks_patterns',
+     'Searching for patterns on stock price charts', 'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
