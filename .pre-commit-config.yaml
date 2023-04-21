@@ -34,7 +34,7 @@ repos:
     -   id: check-toml
     -   id: debug-statements # checks for debugger imports
 #    -   id: end-of-file-fixer # гарантирует, что файл либо пуст, либо заканчивается одной новой строкой
-#    -   id: trailing-whitespace # обрезает конечные пробелы
+    -   id: trailing-whitespace # обрезает конечные пробелы
 #    -   id: requirements-txt-fixer # сортирует записи в файле requirements.txt
     -   id: detect-private-key # обнаруживает наличие приватных ключей
 # https://github.com/dbt-checkpoint/dbt-checkpoint для проверки моделей
