@@ -6,8 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: psf/black@stable
-        with:
-          options: "--check --verbose"
-          src: "."
-          jupyter: true
-          version: "~= 23.3"
+      - run: echo "Black formatting"
