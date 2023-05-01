@@ -8,6 +8,6 @@ jobs:
       - uses: psf/black@stable
         with:
           options: "--check --verbose"
-          src: "./src"
+          src: "."
           jupyter: true
           version: "~= 23.3"
