@@ -5,7 +5,7 @@ description = "Searching for patterns on stock price charts"
 repository = "https://github.com/fasthydra/stocks_patterns"
 authors = ["stocks-patterns_team <fasthydra@gmail.com>"]
 readme = "README.md"
-packages = [{include = "src"}]
+packages = [{ include = "src" }]
 
 
 [tool.poetry.dependencies]
@@ -33,3 +33,9 @@ pathlib = "^1.0.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.flake8]
+extend-ignore = E203
+max-line-length = 79
+max-complexity = 10
+exclude = "docs/"
