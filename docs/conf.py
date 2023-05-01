@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # stocks_patterns documentation build configuration file, created by
 # sphinx-quickstart.
