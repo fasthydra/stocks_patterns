@@ -1,4 +1,5 @@
-[![example workflow](https://github.com/fasthydra/stocks_patterns/actions/workflows/commit.yaml/badge.svg?branch=master)](https://github.com/fasthydra/stocks_patterns/actions/workflows/commit.yaml)
+[![workflow](https://github.com/fasthydra/stocks_patterns/actions/workflows/black_check.yaml/badge.svg?branch=master)](https://github.com/fasthydra/stocks_patterns/actions/workflows/black_check.yaml)
+[![workflow](https://github.com/fasthydra/stocks_patterns/actions/workflows/flake8_check.yaml/badge.svg?branch=master)](https://github.com/fasthydra/stocks_patterns/actions/workflows/flake8_check.yaml)
 
 stocks_patterns
 ==============================
