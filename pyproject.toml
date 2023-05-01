@@ -35,7 +35,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.flake8]
-extend-ignore = E203
+extend-ignore = "E203"
 max-line-length = 79
 max-complexity = 10
 exclude = "docs/"
