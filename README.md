@@ -1,3 +1,5 @@
+[![example workflow](https://github.com/fasthydra/stocks_patterns/actions/workflows/commit.yaml/badge.svg?branch=master)](https://github.com/fasthydra/stocks_patterns/actions/workflows/commit.yaml)
+
 stocks_patterns
 ==============================
 
@@ -50,7 +52,6 @@ Project Organization
     │       └── visualize.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
 
 --------
 
