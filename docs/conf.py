@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # stocks_patterns documentation build configuration file, created by
 # sphinx-quickstart.
@@ -26,7 +25,7 @@ import sys
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = []
+extensions: list = []
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -169,7 +168,7 @@ htmlhelp_basename = "stocks_patternsdoc"
 
 # -- Options for LaTeX output --------------------------------------------------
 
-latex_elements = {
+latex_elements: dict = {
     # The paper size ('letterpaper' or 'a4paper').
     # 'papersize': 'letterpaper',
     # The font size ('10pt', '11pt' or '12pt').
