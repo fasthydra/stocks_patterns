@@ -29,7 +29,10 @@ tqdm = "^4.65.0"
 click = "^8.1.3"
 pathlib = "^1.0.1"
 mypy = "^1.2.0"
+types-requests = "^2.29.0.0"
 
+[tool.poetry.scripts]
+load_data = 'src.data.load_data_from_moex:load_data_from_apimoex'
 
 [build-system]
 requires = ["poetry-core"]
@@ -37,3 +40,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.mypy]
 ignore_missing_imports = "True"
+
+[tool.black]
+line-length = 79
+target-version = ['py39']
