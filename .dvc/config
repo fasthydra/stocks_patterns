@@ -1,0 +1,8 @@
+[core]
+    remote = patterns
+    autostage = true
+['remote "patterns"']
+    url = s3://patterns
+    endpointurl = https://storage.yandexcloud.net
+    access_key_id = YCAJEgGWan3bp-UiXi6Nik2FM
+    secret_access_key = YCNZFMc0jKDzbB1-9uIcYw5T30MHGR_s2tj-3q9-
