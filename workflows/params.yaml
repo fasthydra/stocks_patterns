@@ -1,0 +1,7 @@
+load_moex:
+  security: 'SBER'
+  start: '2021-01-01'
+  end: '2022-01-01'
+  interval: 24
+  paths:
+    output: 'data/raw/sber_2021_24.csv'

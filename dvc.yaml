@@ -1,0 +1,10 @@
+stages:
+  load_moex:
+    cmd: python workflows/load_moex_stocks_candles.py
+    deps:
+    - workflows/load_moex_stocks_candles.py
+    params:
+    - workflows/params.yaml:
+      - load_moex
+    outs:
+    - data/raw/sber_2021_24.csv

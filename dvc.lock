@@ -1,0 +1,21 @@
+schema: '2.0'
+stages:
+  load_moex:
+    cmd: python workflows/load_moex_stocks_candles.py
+    deps:
+    - path: workflows/load_moex_stocks_candles.py
+      md5: 2f99272fcd4b14aea1ee6eb3c92f8958
+      size: 1071
+    params:
+      workflows/params.yaml:
+        load_moex:
+          security: SBER
+          start: '2021-01-01'
+          end: '2022-01-01'
+          interval: 24
+          paths:
+            output: data/raw/sber_2021_24.csv
+    outs:
+    - path: data/raw/sber_2021_24.csv
+      md5: 0681ca8069b75aecf23472ecbd8e2315
+      size: 13454
