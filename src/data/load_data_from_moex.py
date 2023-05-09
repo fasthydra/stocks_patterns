@@ -21,17 +21,21 @@ def load_data_from_apimoex(
 ):
     """
     Сохраняет данные в папку data/raw проекта в формате csv
+
     :param name: Название файла
+
     :param start: Дата вида ГГГГ-ММ-ДД
+
     :param end: Дата вида ГГГГ-ММ-ДД
+
     :param interval:
         Размер свечки - целое число 1 (1 минута), 10 (10 минут),
         60 (1 час), 24 (1 день), 7 (1 неделя), 31 (1 месяц) или
         4 (1 квартал). По умолчанию дневные данные.
+
     :param security: Тикер ценной бумаги
         (https://www.moex.com/ru/listing/securities-list.aspx)
         в столбце Торговый код
-    :return
     """
     with requests.Session() as session:
         try:
