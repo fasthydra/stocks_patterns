@@ -1,0 +1,70 @@
+schema: '2.0'
+stages:
+  load_moex:
+    cmd: python workflows/load_moex_stocks_candles.py
+    deps:
+    - path: workflows/load_moex_stocks_candles.py
+      md5: 119cd21a38f53ea98840cf1ea80d2ffc
+      size: 943
+    params:
+      workflows/params.yaml:
+        load_moex:
+          security: SBER
+          start: '2021-01-01'
+          end: '2021-01-31'
+          interval: 1
+          paths:
+            output: data/raw/sber_2021_1_1.csv
+        slice_ts:
+          column_value: open
+          period: 30
+          step: 10
+          rolling_period: 3
+          predict_period: 10
+          train_sample: -1
+          paths:
+            input: ${load_moex.paths.output}
+            output:
+              cluster: data/interim/sber_clst_2021_1_1.30_10.npy
+              predict: data/interim/sber_prct_2021_1_1.30_10.csv
+    outs:
+    - path: data/raw/sber_2021_1_1.csv
+      md5: 8934c8bf1776249a08f81b60584dcc50
+      size: 987780
+  slice_ts:
+    cmd: python workflows/slice_moex_trading_ts.py --in_file=data/raw/sber_2021_1_1.csv
+    deps:
+    - path: data/raw/sber_2021_1_1.csv
+      md5: 8934c8bf1776249a08f81b60584dcc50
+      size: 987780
+    - path: workflows/slice_moex_trading_ts.py
+      md5: e3290fca300c45fa307efa99a925deb4
+      size: 2067
+    params:
+      workflows/params.yaml:
+        load_moex:
+          security: SBER
+          start: '2021-01-01'
+          end: '2021-01-31'
+          interval: 1
+          paths:
+            output: data/raw/sber_2021_1_1.csv
+        slice_ts:
+          column_value: open
+          period: 30
+          step: 10
+          rolling_period: 3
+          predict_period: 10
+          train_sample: -1
+          paths:
+            input: ${load_moex.paths.output}
+            output:
+              cluster: data/interim/sber_clst_2021_1_1.30_10.npy
+              predict: data/interim/sber_prct_2021_1_1.30_10.csv
+    outs:
+    - path: data/interim/sber_clst_2021_1_1.30_10.npy
+      md5: 9a1e682089e466502bcbdeaf88baf1a2
+      size: 355568
+    - path: data/interim/sber_prct_2021_1_1.30_10.csv
+      md5: df8bc9e374ad4b4944ed76bcab8ed012
+      size: 1167526

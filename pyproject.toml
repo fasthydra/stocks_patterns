@@ -30,6 +30,8 @@ pathlib = "^1.0.1"
 mypy = "^1.2.0"
 types-requests = "^2.29.0.0"
 dvc = {extras = ["s3"], version = "^2.56.0"}
+tslearn = "^0.5.3.2"
+typing = "3.7.4.3"
 
 [tool.poetry.scripts]
 load_data = 'src.data.load_data_from_moex:load_data_from_apimoex'
