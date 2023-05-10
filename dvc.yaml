@@ -1,3 +1,6 @@
+vars:
+  - workflows/params.yaml
+
 stages:
   load_moex:
     cmd: python workflows/load_moex_stocks_candles.py
@@ -5,6 +8,15 @@ stages:
     - workflows/load_moex_stocks_candles.py
     params:
     - workflows/params.yaml:
-      - load_moex
     outs:
-    - data/raw/sber_2021_24.csv
+    - ${load_moex.paths.output}
+  slice_ts:
+    cmd: python workflows/slice_moex_trading_ts.py --in_file=${load_moex.paths.output}
+    deps:
+    - workflows/slice_moex_trading_ts.py
+    - ${load_moex.paths.output}
+    params:
+    - workflows/params.yaml:
+    outs:
+    - ${slice_ts.paths.output.cluster}
+    - ${slice_ts.paths.output.predict}

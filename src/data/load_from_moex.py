@@ -4,7 +4,7 @@ import apimoex
 import pandas as pd
 import requests
 
-logger = logging.getLogger("load_from_moex")
+logger = logging.getLogger("file_logger")
 
 
 def load_stocks(
@@ -36,11 +36,13 @@ def load_stocks(
                 start=start,
                 end=end,
             )
+            logger.debug("Получили данные биржи. Строк: " + str(len(data)))
         except Exception as ex:
-            logging.exception(f"Ошибка: {ex}")
+            logger.exception(f"Ошибка: {ex}")
 
     df = pd.DataFrame(data)
-    df["begin"] = pd.to_datetime(df["begin"])
-    df.set_index("begin", inplace=True)
+    if len(df):
+        df["begin"] = pd.to_datetime(df["begin"])
+        df.set_index("begin", inplace=True)
 
     return df

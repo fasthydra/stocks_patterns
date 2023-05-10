@@ -1,7 +1,20 @@
 load_moex:
   security: 'SBER'
   start: '2021-01-01'
-  end: '2022-01-01'
-  interval: 24
+  end: '2021-01-31'
+  interval: 1
   paths:
-    output: 'data/raw/sber_2021_24.csv'
+     output: 'data/raw/sber_2021_1_1.csv'
+
+slice_ts:
+  column_value: 'open'
+  period: 30
+  step: 10
+  rolling_period: 3
+  predict_period: 10
+  train_sample: -1
+  paths:
+     input: ${load_moex.paths.output}
+     output:
+        cluster: 'data/interim/sber_clst_2021_1_1.30_10.npy'
+        predict: 'data/interim/sber_prct_2021_1_1.30_10.csv'

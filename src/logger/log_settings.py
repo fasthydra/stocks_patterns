@@ -2,7 +2,7 @@ from pathlib import Path
 
 path = Path(__file__).resolve().parents[2]
 
-DATA_DIVISION_LOG_FILENAME = path / "logs/data_division.log"
+LOG_FILENAME = path / "logs/log.log"
 
 LOGGING_CONFIG = {
     "version": 1,
@@ -14,10 +14,10 @@ LOGGING_CONFIG = {
         },
     },
     "handlers": {
-        "logfile_data_div": {
+        "logfile": {
             "class": "logging.FileHandler",
             "level": "DEBUG",
-            "filename": DATA_DIVISION_LOG_FILENAME,
+            "filename": LOG_FILENAME,
             "formatter": "default",
         },
         "verbose_output": {
@@ -29,12 +29,12 @@ LOGGING_CONFIG = {
     },
     "loggers": {
         "info_logger": {
-            "level": "INFO",
+            "level": "DEBUG",
             "handlers": ["verbose_output"],
         },
-        "data_division": {
-            "level": "INFO",
-            "handlers": ["logfile_data_div", "verbose_output"],
+        "file_logger": {
+            "level": "DEBUG",
+            "handlers": ["logfile", "verbose_output"],
         },
     },
 }
