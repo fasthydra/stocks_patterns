@@ -20,3 +20,20 @@ stages:
     outs:
     - ${slice_ts.paths.output.cluster}
     - ${slice_ts.paths.output.predict}
+  optuna_optimize:
+    cmd: >-
+      python workflows/optuna_optimize.py
+      --in_file ${slice_ts.paths.output.cluster}
+      --model_name ${optuna_optimize.model_name}
+      ${optuna_optimize.optimize_range}
+      ${optuna_optimize.model_prmt}
+      --best_clusters ${optuna_optimize.best_clusters}
+      --n_trials ${optuna_optimize.n_trials}
+      --par_file ${optuna_optimize.paths.output.parametrs}
+    deps:
+    - workflows/optuna_optimize.py
+    - ${slice_ts.paths.output.cluster}
+    params:
+    - workflows/params.yaml:
+    outs:
+     - ${optuna_optimize.paths.output.parametrs}

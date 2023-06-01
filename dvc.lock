@@ -4,8 +4,8 @@ stages:
     cmd: python workflows/load_moex_stocks_candles.py
     deps:
     - path: workflows/load_moex_stocks_candles.py
-      md5: 119cd21a38f53ea98840cf1ea80d2ffc
-      size: 943
+      md5: 686a7050101014d1501969a122a6636f
+      size: 939
     params:
       workflows/params.yaml:
         load_moex:
@@ -30,16 +30,16 @@ stages:
     outs:
     - path: data/raw/sber_2021_1_1.csv
       md5: 8934c8bf1776249a08f81b60584dcc50
-      size: 987780
+      size: 972357
   slice_ts:
     cmd: python workflows/slice_moex_trading_ts.py --in_file=data/raw/sber_2021_1_1.csv
     deps:
     - path: data/raw/sber_2021_1_1.csv
       md5: 8934c8bf1776249a08f81b60584dcc50
-      size: 987780
+      size: 972357
     - path: workflows/slice_moex_trading_ts.py
-      md5: e3290fca300c45fa307efa99a925deb4
-      size: 2067
+      md5: 129b602fb386571b69b907e96ee0e48a
+      size: 2083
     params:
       workflows/params.yaml:
         load_moex:
@@ -67,4 +67,4 @@ stages:
       size: 355568
     - path: data/interim/sber_prct_2021_1_1.30_10.csv
       md5: df8bc9e374ad4b4944ed76bcab8ed012
-      size: 1167526
+      size: 1166044
