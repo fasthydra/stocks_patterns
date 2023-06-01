@@ -1,18 +1,21 @@
 import logging
 import logging.config
+import os
 
 import click
-import dotenv
 import mlflow
 import numpy as np
 import yaml
+from dotenv import load_dotenv
 
 from src.logger.log_settings import LOGGING_CONFIG
 from src.models.optimize import optimize
 
-dotenv.load_dotenv()
+load_dotenv()
 mlflow.set_tracking_uri("http://127.0.0.1:5000")
-mlflow.set_experiment("test_dvc")
+mlflow.set_experiment("test_dvc_new")
+
+assert "MLFLOW_S3_ENDPOINT_URL" in os.environ
 
 
 @click.command()

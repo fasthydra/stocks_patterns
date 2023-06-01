@@ -4,11 +4,18 @@ import pprint
 
 import click
 import dvc.api
+import mlflow
 import numpy as np
 import pandas as pd
+from dotenv import load_dotenv
 
 from src.data.preprocessing import data_division
 from src.logger.log_settings import LOGGING_CONFIG
+
+load_dotenv()
+
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
+mlflow.set_experiment("test_dvc_new")
 
 
 @click.command()
@@ -17,6 +24,8 @@ from src.logger.log_settings import LOGGING_CONFIG
 )
 def main(in_file: str):
     params = dvc.api.params_show()["slice_ts"]
+
+    mlflow.log_params(params)
 
     logging.config.dictConfig(LOGGING_CONFIG)
     logger = logging.getLogger("file_logger")
@@ -47,6 +56,7 @@ def main(in_file: str):
             f"Данные (строк: {array_cluster.shape[0]}) успешно загружены /"
             f"в файл {file_to_save}"
         )
+        mlflow.log_artifact(file_to_save)
     except Exception as ex:
         logger.exception(
             f"Ошибка при сохранении датасета в файл {file_to_save}: /" f" {ex}"
@@ -59,6 +69,7 @@ def main(in_file: str):
             f"Данные (строк: {array_predict.shape[0]}) успешно загружены /"
             f"в файл {file_to_save}"
         )
+        mlflow.log_artifact(file_to_save)
     except Exception as ex:
         logger.exception(
             f"Ошибка при сохранении датасета в файл {file_to_save}: /" f" {ex}"
