@@ -30,6 +30,7 @@ stages:
       --best_clusters ${optuna_optimize.best_clusters}
       --n_trials ${optuna_optimize.n_trials}
       --par_file ${optuna_optimize.paths.output.parametrs}
+      --trials_file ${optuna_optimize.paths.output.trials}
     deps:
     - workflows/optuna_optimize.py
     - ${slice_ts.paths.output.cluster}
