@@ -54,6 +54,11 @@ assert "MLFLOW_S3_ENDPOINT_URL" in os.environ
 )
 @click.option("--n_trials", type=int, help="Количество проходов оптимизации")
 @click.option("--par_file", type=str, help="Путь для сохранения параметров")
+@click.option(
+    "--trials_file",
+    type=str,
+    help="Путь для сохранения результатов экспериментов",
+)
 def main(
     in_file: str,
     model_name: str,
@@ -66,6 +71,7 @@ def main(
     best_clusters: int,
     n_trials: int,
     par_file: str,
+    trials_file: str,
 ):
     logging.config.dictConfig(LOGGING_CONFIG)
     logger = logging.getLogger("file_logger")
@@ -78,7 +84,7 @@ def main(
         logger.exception(f"Ошибка чтения файла: {ex}")
 
     try:
-        best_params = optimize(
+        best_params, trials_df = optimize(
             data=input_df,
             model_name=model_name,
             model_prmt={
@@ -100,12 +106,18 @@ def main(
             yaml.dump(
                 best_params, f, sort_keys=False, default_flow_style=False
             )
-
+        mlflow.log_artifact(par_file)
     except Exception as ex:
         logger.exception(f"Ошибка при сохранении параметров: {ex}")
 
-    with mlflow.start_run():
-        mlflow.log_param("my", best_params)
+    try:
+        trials_df.to_csv(sep=",", path_or_buf=trials_file)
+        mlflow.log_artifact(trials_file)
+    except Exception as ex:
+        logger.exception(f"Ошибка при сохранении параметров: {ex}")
+
+    # with mlflow.start_run():
+    #     mlflow.log_param("my", best_params)
 
 
 if __name__ == "__main__":
