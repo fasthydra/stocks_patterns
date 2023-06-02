@@ -18,3 +18,20 @@ slice_ts:
      output:
         cluster: 'data/interim/sber_clst_2021_1_1.30_10.npy'
         predict: 'data/interim/sber_prct_2021_1_1.30_10.csv'
+
+optuna_optimize: # параметры оптимизации для поиска наилучшего числа кластеров
+  optimize_range: # число кластеров, которые подбирает модель
+     opt_min: 10 # минимально
+     opt_max: 50 # максимально
+     opt_step: 10 # шаг подбора
+  model_prmt:
+     max_iter: 10
+     n_init: 1
+     n_clusters: 10
+  best_clusters: 10
+  n_trials: 1
+  model_name: 'KShape'
+  paths:
+     input: ${slice_ts.paths.cluster}
+     output:
+        parametrs: 'models/KShape_best.yaml'
