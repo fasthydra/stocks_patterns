@@ -38,3 +38,12 @@ stages:
     - workflows/params.yaml:
     outs:
      - ${optuna_optimize.paths.output.parametrs}
+  clustering:
+    cmd: >-
+      python workflows/kshape_clustering.py
+      --in_file ${slice_ts.paths.output.cluster}
+      --model_prms_yaml ${optuna_optimize.paths.output.parametrs}
+    deps:
+      - workflows/kshape_clustering.py
+      - ${slice_ts.paths.output.cluster}
+      - ${optuna_optimize.paths.output.parametrs}
