@@ -49,7 +49,7 @@ def metric_std(
     cluster_centers: np.ndarray,
     data: np.ndarray,
     y_pred: np.ndarray,
-    best_cl: int = 10,
+    best_cl: int = None,
 ) -> float:
     """Рассчитывает среднее среднеквадратичное отклонение от центроидов
         по {best_cl} лучшим кластерам (зависит от числа кластеров,
@@ -62,14 +62,20 @@ def metric_std(
 
         y_pred (np.ndarray): Предсказанные кластеры.
 
-        best_cl (int, optional): Количество кластеров для расчета метрики.
-            Defaults to 10.
+        best_cl (Optional[int], optional): Количество кластеров для расчета
+            метрики. Если не указан, то np.mean будет рассчитан по всему
+            списку list_std.
 
     Returns:
         mean_std (float): Среднее СКО на лучших кластерах.
     """
     list_std = std(cluster_centers, data, y_pred)
-    mean_std = np.mean(np.sort(list_std)[:best_cl])
+    sorted_std = np.sort(list_std)
+
+    if best_cl is None:
+        mean_std = np.mean(sorted_std)
+    else:
+        mean_std = np.mean(sorted_std[:best_cl])
 
     return mean_std
 

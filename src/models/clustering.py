@@ -1,4 +1,5 @@
 import logging
+import pickle
 
 import numpy as np
 from tslearn.clustering import KShape
@@ -33,6 +34,9 @@ class KShapeClusterer:
 
         get_metric_std(data, y_pred, best_cl):
         вычисляет СКО для выбранного количества лучших кластеров.
+
+        save(filename): сохраняет объект класса в файл
+        load(filename): загружает объект класса из файла
 
     """
 
@@ -78,7 +82,29 @@ class KShapeClusterer:
         return self.predict(data)
 
     def get_metric_std(
-        self, data: np.ndarray, y_pred: np.ndarray, best_cl: int
+        self, data: np.ndarray, y_pred: np.ndarray, best_cl: int = None
     ) -> float:
         score = metric_std(self.model.cluster_centers_, data, y_pred, best_cl)
         return score
+
+    def save(self, filename):
+        """Сохраняет объект класса в файл с помощью pickle.
+
+        Args:
+            filename (str): Имя файла для сохранения.
+        """
+        with open(filename, "wb") as file:
+            pickle.dump(self, file)
+
+    @staticmethod
+    def load(filename):
+        """Загружает объект класса из файла, созданный с помощью pickle.
+
+        Args:
+            filename (str): Имя файла для загрузки.
+
+        Returns:
+            KShapeClusterer: Загруженный объект класса KShapeClusterer.
+        """
+        with open(filename, "rb") as file:
+            return pickle.load(file)
