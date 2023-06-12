@@ -13,7 +13,7 @@ from src.models.optimize import optimize
 
 load_dotenv()
 mlflow.set_tracking_uri("http://127.0.0.1:5000")
-mlflow.set_experiment("test_dvc_new")
+mlflow.set_experiment("test_3_6")
 
 assert "MLFLOW_S3_ENDPOINT_URL" in os.environ
 

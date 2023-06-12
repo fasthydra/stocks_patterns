@@ -47,6 +47,19 @@ services:
       - MLFLOW_S3_ENDPOINT_URL=${MLFLOW_S3_ENDPOINT_URL}
     command: mlflow server --backend-store-uri postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB} --default-artifact-root s3://${AWS_S3_BUCKET}/ --host 0.0.0.0
 
+  fastapi:
+    container_name: fastapi_server
+    restart: always
+    image: apimodel:latest
+    ports:
+      - "8000:8000"
+    networks:
+      - postgres
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - MLFLOW_S3_ENDPOINT_URL=${MLFLOW_S3_ENDPOINT_URL}
+    command: poetry run uvicorn inference:app --host 0.0.0.0 --port 8000
+
 volumes:
   postgres:
   my-data:

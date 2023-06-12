@@ -52,7 +52,6 @@ def optimize(
     logger.debug(f"Имя модели: {model_name}")
     logger.debug(f"Параметры для модели: {model_prmt}")
 
-    # @mlflc.track_in_mlflow()
     def objective(trial, _best_score=1):
         np.random.seed(seed)
         iteration.append(1)
