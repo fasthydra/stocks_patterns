@@ -9,22 +9,6 @@ from src.models.metrics import metric_std
 logger = logging.getLogger("file_logger")
 
 
-def get_clustering_model(model_name: str, model_prmt: dict) -> object:
-    """Инициализирует модель с заданными параметрами.
-
-    Args:
-        model_name (str): Имя модели кластеризации.
-        model_prmt (dict): Словарь с параметрами модели.
-
-    Returns:
-        object: Экземпляр класса модели.
-    """
-    if model_name == "KShape":
-        return KShapeClusterer(model_prmt)
-    else:
-        logger.error(f"Неверное имя модели: {model_name}")
-
-
 class KShapeClusterer:
     """Создает модель кластеризации KShape по заданным параметрам
 
@@ -108,3 +92,19 @@ class KShapeClusterer:
         """
         with open(filename, "rb") as file:
             return pickle.load(file)
+
+
+def get_clustering_model(model_name: str, model_prmt: dict) -> KShapeClusterer:
+    """Инициализирует модель с заданными параметрами.
+
+    Args:
+        model_name (str): Имя модели кластеризации.
+        model_prmt (dict): Словарь с параметрами модели.
+
+    Returns:
+        object: Экземпляр класса модели.
+    """
+    if model_name == "KShape":
+        return KShapeClusterer(model_prmt)
+    else:
+        logger.error(f"Неверное имя модели: {model_name}")

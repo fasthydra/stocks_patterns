@@ -49,10 +49,12 @@ class KShapeClustererWrapper(mlflow.pyfunc.PythonModel):
 @click.option(
     "--in_file",
     required=True,
+    type=str,
     help="Input file full path to read the trading data",
 )
 @click.option(
     "--model_prms_yaml",
+    required=True,
     type=str,
     help="Путь до yaml-файла с параметрами модели",
 )
@@ -67,6 +69,8 @@ def main(in_file: str, model_prms_yaml: str, model_name: str = "KShape"):
                 max_iter,
                 n_init,
                 n_clusters,
+
+        model_name (str): Имя зарегистрированной в MlFlow модели
     """
 
     logging.config.dictConfig(LOGGING_CONFIG)
