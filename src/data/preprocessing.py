@@ -70,7 +70,7 @@ def data_division(
             df_day = df_grouped.get_group(dates)
             my_list = list(df_day["new_col"])
             composite_list = [
-                my_list[x: x + period + predict_period]
+                my_list[x : x + period + predict_period]
                 for x in range(
                     0, len(my_list) - period - predict_period + 1, step
                 )
