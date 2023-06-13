@@ -93,7 +93,7 @@ def main(
                 "n_clusters": n_clusters,
             },
             opt_clusters_min_max_step=(opt_min, opt_max, opt_step),
-            best_cl=best_clusters,
+            best_clusters=best_clusters,
             n_trials=n_trials,
         )
         logger.info("Параметры модели подобраны.")

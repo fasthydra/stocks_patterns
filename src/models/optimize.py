@@ -14,15 +14,15 @@ def optimize(
     model_name: str,
     model_prmt: dict,
     opt_clusters_min_max_step: tuple,
-    best_cl: int = 10,
+    best_clusters: int = 10,
     n_trials: int = 10,
-) -> dict:
+) -> tuple[dict, object]:
     """Подбирает параметры для датасета и модели кластеризации.
 
     Args:
          data (np.ndarray): Стандартизированный датасет.
 
-         all_clusters_min_max_step (tuple): Число кластеров, которые
+         opt_clusters_min_max_step (tuple): Число кластеров, которые
              подбирает модель (ОТ, ДО, ШАГ).
 
          model_name (str): Имя модели для подбора параметров.
@@ -52,7 +52,6 @@ def optimize(
     logger.debug(f"Имя модели: {model_name}")
     logger.debug(f"Параметры для модели: {model_prmt}")
 
-    # @mlflc.track_in_mlflow()
     def objective(trial, _best_score=1):
         np.random.seed(seed)
         iteration.append(1)
@@ -74,7 +73,7 @@ def optimize(
 
         # test for repeated params
         # we use tuple because that's easier to add more params this way
-        if (n_clusters) in param_history:
+        if n_clusters in param_history:
             logger.info(
                 f"Итерация {np.sum(iteration)} / {n_trials} завершена "
                 + "в связи с повтором параметров"
@@ -90,7 +89,7 @@ def optimize(
             sec = time.time() - ts
 
             y_pred = model.predict(data)
-            score = model.get_metric_std(data, y_pred, best_cl)
+            score = model.get_metric_std(data, y_pred, best_clusters)
 
         except Exception as ex:
             logger.debug(
@@ -118,6 +117,17 @@ def optimize(
     study = optuna.create_study(direction="minimize", storage=storage)
     study.optimize(objective, n_trials=n_trials, show_progress_bar=False)
 
-    logger.info(f"Лучшие параметры: {study.best_params}")
+    best_params = study.best_params.copy()
 
-    return study.best_params, study.trials_dataframe()
+    if not best_params.get("max_iter", None):
+        best_params["max_iter"] = model_prmt["max_iter"]
+
+    if not best_params.get("n_init", None):
+        best_params["n_init"] = model_prmt["n_init"]
+
+    if not best_params.get("n_clusters", None):
+        best_params["n_clusters"] = model_prmt["n_clusters"]
+
+    logger.info(f"Лучшие параметры: {best_params}")
+
+    return best_params, study.trials_dataframe()

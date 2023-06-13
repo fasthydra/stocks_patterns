@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Searching for patterns on stock price charts"
 repository = "https://github.com/fasthydra/stocks_patterns"
 authors = ["stocks-patterns_team <fasthydra@gmail.com>"]
-readme = "README.md"
+readme = ".github/README.md"
 packages = [{ include = "src" }]
 
 

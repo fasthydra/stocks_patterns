@@ -22,14 +22,14 @@ slice_ts:
 optuna_optimize: # параметры оптимизации для поиска наилучшего числа кластеров
   optimize_range: # число кластеров, которые подбирает модель
      opt_min: 55 # минимально
-     opt_max: 65 # максимально
+     opt_max: 57 # максимально
      opt_step: 1 # шаг подбора
   model_prmt:
-     max_iter: 50
-     n_init: 2
+     max_iter: 10
+     n_init: 1
      n_clusters: 10
   best_clusters: 10
-  n_trials: 30
+  n_trials: 20
   model_name: 'KShape'
   paths:
      input: ${slice_ts.paths.cluster}
