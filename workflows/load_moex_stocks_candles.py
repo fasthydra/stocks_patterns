@@ -1,18 +1,20 @@
 import logging
 import logging.config
+import os
 import pprint
 
 import dvc.api
 import mlflow
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 from src.data.load_from_moex import load_stocks
 from src.logger.log_settings import LOGGING_CONFIG
 
+load_dotenv(find_dotenv(usecwd=True))
 load_dotenv()
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
-mlflow.set_experiment("test_dvc_new")
+assert "MLFLOW_S3_ENDPOINT_URL" in os.environ
+assert "MLFLOW_EXPERIMENT_NAME" in os.environ
 
 params = dvc.api.params_show()["load_moex"]
 

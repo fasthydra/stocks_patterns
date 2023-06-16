@@ -6,16 +6,16 @@ import click
 import mlflow
 import numpy as np
 import yaml
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 from src.logger.log_settings import LOGGING_CONFIG
 from src.models.optimize import optimize
 
+load_dotenv(find_dotenv(usecwd=True))
 load_dotenv()
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
-mlflow.set_experiment("test_3_6")
 
 assert "MLFLOW_S3_ENDPOINT_URL" in os.environ
+assert "MLFLOW_EXPERIMENT_NAME" in os.environ
 
 
 @click.command()

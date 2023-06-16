@@ -1,5 +1,6 @@
 import logging
 import logging.config
+import os
 import pprint
 
 import click
@@ -7,15 +8,16 @@ import dvc.api
 import mlflow
 import numpy as np
 import pandas as pd
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 from src.data.preprocessing import data_division
 from src.logger.log_settings import LOGGING_CONFIG
 
+load_dotenv(find_dotenv(usecwd=True))
 load_dotenv()
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
-mlflow.set_experiment("test_dvc_new")
+assert "MLFLOW_S3_ENDPOINT_URL" in os.environ
+assert "MLFLOW_EXPERIMENT_NAME" in os.environ
 
 
 @click.command()
