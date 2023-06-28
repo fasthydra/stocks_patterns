@@ -37,8 +37,6 @@ services:
     restart: always
     build: ./mlflow_image
     image: mlflow_server
-    ports:
-      - "5000:5000"
     networks:
       - postgres
       - mlflow_network
